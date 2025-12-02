@@ -14,17 +14,24 @@
 
     <div id="etch-a-sketch">
 
-      <canvas id="canvas">
+      <h1>Etch-A-Sketch</h1>
+
+      <canvas width="800px" height="500px" id="canvas">
 
       </canvas>
 
       <div id="controls">
-        <div class="dial" id="dial-left"></div>
+        <div class="dial" id="dial-left">X</div>
 
-        <div class="dial" id="dial-right"></div>
+        <div class="dial" id="dial-right">Y</div>
       </div>
 
 
+    </div>
+
+    <div id="dashboard">
+      <button onclick="shake()" type="">Shake</button>
+      <p>Draw by scrolling on the dials or using the arrow keys</p>
     </div>
 
   </main>
