@@ -23,12 +23,15 @@ function draw(newX, newY) {
 // dial setup
 const dialLeft = document.getElementById('dial-left');
 const dialRight = document.getElementById('dial-right');
+let dialLeftRotation = 0;
+let dialRightRotation = 0;
 
 // scroll setup
 dialLeft.addEventListener('wheel', (e) => {
   e.preventDefault();
   const delta = e.deltaY;
-  dialLeft.style.transform = `rotate(${delta}deg)`;
+  dialLeftRotation += delta;
+  dialLeft.style.transform = `rotate(${dialLeftRotation}deg)`;
   const newX = x + delta * .01;
   draw(newX, y);
 });
@@ -36,7 +39,8 @@ dialLeft.addEventListener('wheel', (e) => {
 dialRight.addEventListener('wheel', (e) => {
   e.preventDefault();
   const delta = e.deltaY;
-  dialRight.style.transform = `rotate(${delta}deg)`;
+  dialRightRotation += delta;
+  dialRight.style.transform = `rotate(${dialRightRotation}deg)`;
   const newY = y + delta * .01;
   draw(x, newY);
 });
@@ -44,17 +48,26 @@ dialRight.addEventListener('wheel', (e) => {
 // arrow keys setup
 document.addEventListener('keydown', (e) => {
   const step = 2;
+  const dialRotationAmount = 10;
   switch (e.key) {
     case 'ArrowLeft':
+      dialLeftRotation -= dialRotationAmount;
+      dialLeft.style.transform = `rotate(${dialLeftRotation}deg)`;
       draw(x - step, y);
       break;
     case 'ArrowRight':
+      dialLeftRotation += dialRotationAmount;
+      dialLeft.style.transform = `rotate(${dialLeftRotation}deg)`;
       draw(x + step, y);
       break;
     case 'ArrowUp':
+      dialRightRotation -= dialRotationAmount;
+      dialRight.style.transform = `rotate(${dialRightRotation}deg)`;
       draw(x, y - step);
       break;
     case 'ArrowDown':
+      dialRightRotation += dialRotationAmount;
+      dialRight.style.transform = `rotate(${dialRightRotation}deg)`;
       draw(x, y + step);
       break;
   }
